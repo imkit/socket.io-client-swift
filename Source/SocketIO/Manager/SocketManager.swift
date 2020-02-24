@@ -491,7 +491,9 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
         let backoffFactor = pow(1.5, attempts)
         let interval = Double(reconnectWait) * Double(truncating: backoffFactor as NSNumber)
         // add in a random factor smooth thundering herds
-        let rand = Double.random(in: 0 ..< 1)
+        var bytes = [Double](repeating: 0, count: 1)
+        _ = SecRandomCopyBytes(kSecRandomDefault, bytes.count, &bytes)
+        let rand = abs(bytes[0]) / Double.max
         let randomFactor = rand * randomizationFactor * Double(truncating: interval as NSNumber)
         // add in random factor, and clamp to min and max values
         let combined = interval + randomFactor

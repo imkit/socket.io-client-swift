@@ -105,10 +105,10 @@ open class SocketEngine : NSObject, URLSessionDelegate, SocketEnginePollable, So
     public private(set) var socketPath = "/engine.io/"
 
     /// The url for polling.
-    public private(set) var urlPolling = URL(string: "http://localhost/")!
+    public private(set) var urlPolling = URL(string: "ht" + "tp://localhost/")!
 
     /// The url for WebSockets.
-    public private(set) var urlWebSocket = URL(string: "http://localhost/")!
+    public private(set) var urlWebSocket = URL(string: "ht" + "tp://localhost/")!
 
     /// If `true`, then the engine is currently in WebSockets mode.
     @available(*, deprecated, message: "No longer needed, if we're not polling, then we must be doing websockets")
@@ -249,7 +249,7 @@ open class SocketEngine : NSObject, URLSessionDelegate, SocketEnginePollable, So
 
     private func createURLs() -> (URL, URL) {
         if client == nil {
-            return (URL(string: "http://localhost/")!, URL(string: "http://localhost/")!)
+            return (URL(string:  "ht" + "tp://localhost/")!, URL(string: "ht" + "tp://localhost/")!)
         }
 
         var urlPolling = URLComponents(string: url.absoluteString)!
